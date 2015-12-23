@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html">
+  <title> What's my name again? .js </title>
+</head>
+
+<body onload="_bodyonload()" onunload="_bodyonunload()">
+  <h1>Whats my name again.js</h1>
+  <p id="welcomeback">say your name and hit refresh</p>
+  <input id="nameinput" type="text" name="user_name" placeholder="whats my name">
+  </input>
+  <!--
+  <button type="button" onclick="_savenameclick()">
+    save name</button>
+  -->
+  <p id="echoname"></p>
+  <p id="echodate"></p>
+
+  <button type="button" onclick="_forgetmeclick() ">
+   forget me 
+  </button>
+  <script>
+    var _savenameclick = function() {
+      console.log('_savenameclick');
+      var ele_echodate = document.getElementById('echodate');
+      var ele_echoname = document.getElementById('echoname');
+      var ele_nameinput = document.getElementById('nameinput');
+
+      ele_echoname.innerHTML = ele_nameinput.value;
+      ele_echodate.innerHTML = Date();
+
+      var reversedomain = 'com.designr8.datastore.';
+      localStorage.setItem( reversedomain + 'name', ele_nameinput.value );
+
+    };
+
+    var _forgetmeclick = function() {
+      console.log('_forgetmeclick');
+      localStorage.clear();
+    };
+
+    var _bodyonload = function() {
+      var reversedomain = 'com.designr8.datastore.';
+      console.log('_bodyonload');
+      var ln = localStorage.getItem( reversedomain + 'name');
+      var ele_welcomeback = document.getElementById('welcomeback');
+      if ( ln === undefined ) {
+        ele_welcomeback.innerHTML = 'hmm I dont know you ...';
+      } else {
+        ele_welcomeback.innerHTML = ln;
+      }
+    };
+
+    var _bodyonunload = function() {
+      console.log('_bodyonunload');
+      var reversedomain = 'com.designr8.datastore.';
+      var ele_nameinput = document.getElementById('nameinput');
+      localStorage.setItem( reversedomain + 'name', ele_nameinput.value);
+    };
+  </script>
+
+
+</body>
+
+</html>
